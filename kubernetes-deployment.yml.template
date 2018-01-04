@@ -18,7 +18,7 @@ spec:
 apiVersion: extensions/v1beta1
 kind: Deployment
 metadata:
-  name: aura-js-creditscore-v1
+  name: aura-js-creditscore-v2
 spec:
   replicas: 1
   revisionHistoryLimit: 2
@@ -26,7 +26,7 @@ spec:
     metadata:
       labels:
         app: aura-js-creditscore
-        version: v1        
+        version: v2
     spec:
       containers:
       - name: aura-js-creditscore
