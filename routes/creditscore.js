@@ -67,30 +67,13 @@ String.prototype.hashCode = function() {
  */
 
 exports.list = function(req, res){
-    if (req.is('application/json')) {
-        console.log("JSON");
-        console.log(req.body);
-        // var person = JSON.parse(JSON.stringify(req.body));
-        // var firstname = person.firstname,
-        //     lastname = person.lastname,
-        //     dateofbirth = person.dateofbirth,
-        //     ssn = person.ssn;
-    } else {
-
-        console.log("NOT JSON");
-        console.log(req.body);
-        // console.log('Request body: ' + util.inspect(req.body));
-        // var firstname = req.body.firstname,
-        //     lastname = req.body.lastname,
-        //     dateofbirth = req.body.dateofbirth,
-        //     ssn = req.body.ssn;
-    }
+    console.log("Entering list all scores function V2");
+    console.log(req.body);
 
     var resultData = {
         "SERVICE VERSION": "aura-js-creditscore V2",
         "MESSAGE": "NO SCORES - (SAVE NOT IMPLEMENTED IN aura-js-creditscore V2)"
     };
-
 
     res.setHeader('Content-Type', 'application/json');
     res.send(JSON.stringify(resultData));
