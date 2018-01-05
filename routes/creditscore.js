@@ -50,16 +50,17 @@ exports.score = function(req, res){
 		};
 
     // Use connect method to connect to the server
-    MongoClient.connect(url, function(err, client) {
+    MongoClient.connect(url, function(err, db) {
         assert.equal(null, err);
         console.log("Connected successfully to server .. Proceeding to insert the credit score");
 
-        const db = client.db(dbName);
+//        const db = client.db(dbName);
 
         // Use this method to save a credit score
         insertCreditScore(resultData, db, function() {
             console.log("Inserted the credit score");
-            client.close();
+//            client.close();
+            db.close();
         });
 
     });
