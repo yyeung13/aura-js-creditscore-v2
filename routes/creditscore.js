@@ -2,9 +2,9 @@ const MongoClient = require('mongodb').MongoClient;
 const assert = require('assert');
 
 // Connection URL
-const url = 'mongodb://mongodb-sb-inst-1-mongodb.default.svc.cluster.local:27017';
+const url = 'mongodb://mongodb-sb-inst-1-mongodb.default.svc.cluster.local:27017/credit-score';
 // Database Name
-const dbName = 'credit-score';
+//const dbName = 'credit-score';
 
 
 var SCORE_MAX = 800;
@@ -50,15 +50,16 @@ exports.score = function(req, res){
 		};
 
     // Use connect method to connect to the server
-    MongoClient.connect(url, function(err, client) {
+    MongoClient.connect(url, function(err, db) {
         assert.equal(null, err);
         console.log("Connected successfully to server .. Proceeding to insert the credit score");
 
-        const db = client.db(dbName);
+//        const db = client.db(dbName);
 
         // Use this method to save a credit score
         insertCreditScore(resultData, db, function() {
-            client.close();
+//            client.close();
+            db.close();
         });
 
     });
