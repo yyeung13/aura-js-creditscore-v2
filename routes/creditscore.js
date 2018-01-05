@@ -52,7 +52,7 @@ exports.score = function(req, res){
     // Use connect method to connect to the server
     MongoClient.connect(url, function(err, client) {
         assert.equal(null, err);
-        console.log("Connected successfully to server");
+        console.log("Connected successfully to server .. Proceeding to insert the credit score");
 
         const db = client.db(dbName);
 
@@ -123,6 +123,7 @@ exports.list = function(req, res){
  */
 
 const insertCreditScore = function(creditScore, db, callback) {
+    console.log("Entering insertCreditScore function");
     // Get the credit-scores collection
     const collection = db.collection('credit-scores');
     // Insert some documents
