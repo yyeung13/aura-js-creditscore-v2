@@ -2,7 +2,7 @@ const MongoClient = require('mongodb').MongoClient;
 const assert = require('assert');
 
 // Connection URL
-const url = 'mongodb://mongodb-sb-inst-1-mongodb.default.svc.cluster.local:27017/credit-score';
+const url = 'mongodb://root:MSCCRVKOIA@mongodb-sb-inst-1-mongodb.default.svc.cluster.local:27017/credit-score';
 // Database Name
 //const dbName = 'credit-score';
 
