@@ -50,16 +50,16 @@ exports.score = function(req, res){
 		};
 
     // Use connect method to connect to the server
-    MongoClient.connect(url, function(err, db) {
+    MongoClient.connect(url, function(err, client) {
         assert.equal(null, err);
         console.log("Connected successfully to server .. Proceeding to insert the credit score");
 
-//        const db = client.db(dbName);
+        const db = client.db(dbName);
 
         // Use this method to save a credit score
         insertCreditScore(resultData, db, function() {
-//            client.close();
-            db.close();
+            console.log("Inserted the credit score");
+            client.close();
         });
 
     });
@@ -125,10 +125,7 @@ exports.list = function(req, res){
 
 const insertCreditScore = function(creditScore, db, callback) {
     console.log("Entering insertCreditScore function");
-    // Get the credit-scores collection
-    const collection = db.collection('credit-scores');
-    // Insert some documents
-    collection.insertOne(creditScore, function(err, result) {
+    db.collection('credit-scores').insertOne(creditScore, function(err, result) {
         assert.equal(err, null);
         assert.equal(1, result.result.n);
         assert.equal(1, result.ops.length);
