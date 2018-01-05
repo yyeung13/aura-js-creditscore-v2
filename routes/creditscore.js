@@ -1,6 +1,16 @@
+const MongoClient = require('mongodb').MongoClient;
+const assert = require('assert');
+
+// Connection URL
+const url = 'mongodb://mongodb-sb-inst-1-mongodb.default.svc.cluster.local:27017';
+// Database Name
+const dbName = 'credit-score';
+
+
 var SCORE_MAX = 800;
 var SCORE_MIN = 550;
 var util = require('util');
+
 
 /*
  * POST scoring.
@@ -75,7 +85,18 @@ exports.list = function(req, res){
         "MESSAGE": "NO SCORES - (SAVE NOT IMPLEMENTED IN aura-js-creditscore V2)"
     };
 
+    // Use connect method to connect to the server
+    MongoClient.connect(url, function(err, client) {
+        assert.equal(null, err);
+        console.log("Connected successfully to server");
+
+        const db = client.db(dbName);
+
+        client.close();
+    });
+
     res.setHeader('Content-Type', 'application/json');
     res.send(JSON.stringify(resultData));
 };
+
 
