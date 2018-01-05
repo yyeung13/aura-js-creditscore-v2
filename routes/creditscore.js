@@ -49,8 +49,22 @@ exports.score = function(req, res){
 		  "score": score
 		};
 
-  
-  res.setHeader('Content-Type', 'application/json');
+    // Use connect method to connect to the server
+    MongoClient.connect(url, function(err, client) {
+        assert.equal(null, err);
+        console.log("Connected successfully to server");
+
+        const db = client.db(dbName);
+
+        // Use this method to save a credit score
+        insertCreditScore(resultData, db, function() {
+            client.close();
+        });
+
+    });
+
+
+    res.setHeader('Content-Type', 'application/json');
   res.send(JSON.stringify(resultData));
 };
 
@@ -92,7 +106,11 @@ exports.list = function(req, res){
 
         const db = client.db(dbName);
 
-        client.close();
+        // Use this method to get all credit scores
+        resultData = getAllCreditScores(db, function() {
+            client.close();
+        });
+
     });
 
     res.setHeader('Content-Type', 'application/json');
@@ -100,3 +118,35 @@ exports.list = function(req, res){
 };
 
 
+/*
+ * Insert credit score
+ */
+
+const insertCreditScore = function(creditScore, db, callback) {
+    // Get the credit-scores collection
+    const collection = db.collection('credit-scores');
+    // Insert some documents
+    collection.insertOne(creditScore, function(err, result) {
+        assert.equal(err, null);
+        assert.equal(1, result.result.n);
+        assert.equal(1, result.ops.length);
+        console.log("Inserted 1 creditscore into the collection");
+        callback(result);
+    });
+}
+
+/*
+ * Get all credit scores
+ */
+
+const getAllCreditScores = function(db, callback) {
+    // Get the credit-scores collection
+    const collection = db.collection('credit-scores');
+    // Find all documents
+    collection.find({}).toArray(function(err, docs) {
+        assert.equal(err, null);
+        console.log("Found the following records");
+        console.log(docs);
+        callback(docs);
+    });
+}
