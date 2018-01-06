@@ -54,9 +54,8 @@ exports.score = function(req, res){
 
     // Use connect method to connect to the server
     MongoClient.connect(url, function(err, db) {
-//        assert.equal(null, err);
         if (err) {
-            console.log("Unable to connect to mongo" + err);
+            console.log("Unable to connect to mongo: " + err);
         } else {
             console.log("We are connected to mongo");
             console.log("Connected successfully to server .. Proceeding to insert the credit score");
@@ -135,11 +134,15 @@ exports.list = function(req, res){
 const insertCreditScore = function(creditScore, db, callback) {
     console.log("Entering insertCreditScore function");
     db.collection('credit-scores').insertMany([creditScore], function(err, result) {
-        assert.equal(err, null);
-        assert.equal(1, result.result.n);
-        assert.equal(1, result.ops.length);
-        console.log("Inserted 1 creditscore into the collection");
-        callback(result);
+        if (err) {
+            console.log("Error inserting credit score in mongo: " + err);
+        } else {
+            console.log("Inserted credit score in mongo");
+//            assert.equal(1, result.result.n);
+//            assert.equal(1, result.ops.length);
+            console.log("Inserted 1 creditscore into the collection: " + result);
+            callback(result);
+        }
     });
 }
 
@@ -152,9 +155,12 @@ const getAllCreditScores = function(db, callback) {
     const collection = db.collection('credit-scores');
     // Find all documents
     collection.find({}).toArray(function(err, docs) {
-        assert.equal(err, null);
-        console.log("Found the following records");
-        console.log(docs);
-        callback(docs);
+        if (err) {
+            console.log("Error finding credit scores in mongo: " + err);
+        } else {
+            console.log("Found the following credit scores");
+            console.log(docs);
+            callback(docs);
+        }
     });
 }
