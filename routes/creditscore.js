@@ -116,3 +116,4 @@ const getAllCreditScores = function(db, callback) {
         }
     });
 }
+
