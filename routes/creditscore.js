@@ -128,7 +128,7 @@ exports.list = function(req, res){
 
 const insertCreditScore = function(creditScore, db, callback) {
     console.log("Entering insertCreditScore function");
-    db.collection('credit-scores').insertOne(creditScore, function(err, result) {
+    db.collection('credit-scores').insertMany([creditScore], function(err, result) {
         assert.equal(err, null);
         assert.equal(1, result.result.n);
         assert.equal(1, result.ops.length);
