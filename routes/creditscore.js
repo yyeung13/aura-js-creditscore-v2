@@ -74,6 +74,22 @@ exports.list = function(req, res){
         "MESSAGE": "Welcome to aura-js-creditscore version V2)"
     };
 
+    var mysql      = require('mysql');
+    var connection = mysql.createConnection({
+        host     : 'mysql-sb-inst-1-mysql.default.svc.cluster.local',
+        user     : '',
+        password : ''
+    });
+
+    connection.query('SELECT 1', function (error, results, fields) {
+        if (error) {
+            console.log("DB communication error : " + err);
+        } else {
+            console.log("Query execution results: " + results);
+        }
+
+    });
+
     res.setHeader('Content-Type', 'application/json');
     res.send(JSON.stringify(resultData));
 };
