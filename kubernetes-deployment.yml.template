@@ -31,10 +31,10 @@ spec:
       containers:
       - name: aura-js-creditscore
         env:
-        - name: MONGO_PROPERTIES
+        - name: DB_INFO
           valueFrom:
             secretKeyRef:
-              name: secret-mongodb-sb-inst-1
+              name: secret-mysql-sb-inst-1
               key: connection.json
         image: wcr.io/$WERCKER_APPLICATION_OWNER_NAME/$WERCKER_APPLICATION_NAME:$WERCKER_GIT_BRANCH-$WERCKER_GIT_COMMIT
         imagePullPolicy: IfNotPresent
