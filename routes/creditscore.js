@@ -4,7 +4,7 @@ const assert = require('assert');
 // Connection URL
 //const url = 'mongodb://root:MSCCRVKOIA@mongodb-sb-inst-1-mongodb.default.svc.cluster.local:27017/admin';
 //const url = 'mongodb://mongodb-sb-inst-1-mongodb.default.svc.cluster.local:27017/test';
-const url = 'mongodb://hackathon:oracle@ds131878.mlab.com:31878/trackdb';
+const url = 'mongodb://oracle:oracle@ds245687.mlab.com:45687/credit-score';
 
 // Database Name
 //const dbName = 'credit-score';
@@ -54,17 +54,22 @@ exports.score = function(req, res){
 
     // Use connect method to connect to the server
     MongoClient.connect(url, function(err, db) {
-        assert.equal(null, err);
-        console.log("Connected successfully to server .. Proceeding to insert the credit score");
+//        assert.equal(null, err);
+        if (err) {
+            console.log("Unable to connect to mongo" + err);
+        } else {
+            console.log("We are connected to mongo");
+            console.log("Connected successfully to server .. Proceeding to insert the credit score");
 
 //        const db = client.db(dbName);
 
-        // Use this method to save a credit score
-        insertCreditScore(resultData, db, function() {
-            console.log("Inserted the credit score");
+            // Use this method to save a credit score
+            insertCreditScore(resultData, db, function () {
+                console.log("Inserted the credit score");
 //            client.close();
-            db.close();
-        });
+                db.close();
+            });
+        }
 
     });
 
