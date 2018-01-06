@@ -3,7 +3,7 @@ const assert = require('assert');
 
 // Connection URL
 //const url = 'mongodb://root:MSCCRVKOIA@mongodb-sb-inst-1-mongodb.default.svc.cluster.local:27017/admin';
-const url = 'mongodb://mongodb-sb-inst-1-mongodb.default.svc.cluster.local:27017/credit-score?authSource=admin';
+const url = 'mongodb://mongodb-sb-inst-1-mongodb.default.svc.cluster.local:27017/test';
 
 // Database Name
 //const dbName = 'credit-score';
