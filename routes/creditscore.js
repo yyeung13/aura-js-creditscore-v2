@@ -77,8 +77,8 @@ exports.list = function(req, res){
     var mysql      = require('mysql');
     var connection = mysql.createConnection({
         host     : 'mysql-sb-inst-1-mysql.default.svc.cluster.local',
-        user     : '',
-        password : ''
+        user     : 'root',
+        password : 'vzmWaPDPEO'
     });
 
     connection.query('SELECT 1', function (error, results, fields) {
