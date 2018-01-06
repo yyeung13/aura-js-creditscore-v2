@@ -83,7 +83,7 @@ exports.list = function(req, res){
 
     connection.query('SELECT 1', function (error, results, fields) {
         if (error) {
-            console.log("DB communication error : " + err);
+            console.log("DB communication error : " + error);
         } else {
             console.log("Query execution results: " + results);
         }
