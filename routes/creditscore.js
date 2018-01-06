@@ -85,7 +85,9 @@ exports.list = function(req, res){
         if (error) {
             console.log("DB communication error : " + error);
         } else {
+            console.log("Connected to DB");
             console.log("Query execution results: " + results);
+            console.log("Query execution results: " + fields);
         }
 
     });
