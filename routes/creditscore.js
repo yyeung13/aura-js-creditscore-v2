@@ -1,15 +1,3 @@
-const MongoClient = require('mongodb').MongoClient;
-const assert = require('assert');
-
-// Connection URL
-//const url = 'mongodb://root:MSCCRVKOIA@mongodb-sb-inst-1-mongodb.default.svc.cluster.local:27017/admin';
-const url = 'mongodb://mongodb-sb-inst-1-mongodb.default.svc.cluster.local:27017/credit-score';
-//const url = 'mongodb://oracle:oracle@ds245687.mlab.com:45687/credit-score';
-
-// Database Name
-//const dbName = 'credit-score';
-
-
 var SCORE_MAX = 800;
 var SCORE_MIN = 550;
 var util = require('util');
@@ -52,28 +40,7 @@ exports.score = function(req, res){
 		  "score": score
 		};
 
-    // Use connect method to connect to the server
-    MongoClient.connect(url, function(err, db) {
-        if (err) {
-            console.log("Unable to connect to mongo: " + err);
-        } else {
-            console.log("We are connected to mongo");
-            console.log("Connected successfully to server .. Proceeding to insert the credit score");
-
-//        const db = client.db(dbName);
-
-            // Use this method to save a credit score
-            insertCreditScore(resultData, db, function () {
-                console.log("Inserted the credit score");
-//            client.close();
-                db.close();
-            });
-        }
-
-    });
-
-
-    res.setHeader('Content-Type', 'application/json');
+  res.setHeader('Content-Type', 'application/json');
   res.send(JSON.stringify(resultData));
 };
 
@@ -104,23 +71,8 @@ exports.list = function(req, res){
     console.log(req.body);
 
     var resultData = {
-        "SERVICE VERSION": "aura-js-creditscore V2",
-        "MESSAGE": "NO SCORES - (SAVE NOT IMPLEMENTED IN aura-js-creditscore V2)"
+        "MESSAGE": "Welcome to aura-js-creditscore version V2)"
     };
-
-    // Use connect method to connect to the server
-    MongoClient.connect(url, function(err, client) {
-        assert.equal(null, err);
-        console.log("Connected successfully to server");
-
-        const db = client.db(dbName);
-
-        // Use this method to get all credit scores
-        resultData = getAllCreditScores(db, function() {
-            client.close();
-        });
-
-    });
 
     res.setHeader('Content-Type', 'application/json');
     res.send(JSON.stringify(resultData));
