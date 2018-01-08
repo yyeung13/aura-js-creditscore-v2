@@ -19,6 +19,7 @@ exports.list = function(req, res){
     };
 
     console.log("Access the env variable in nodejs. Value of : process.env" + process.env);
+    console.log("Access the env variable in nodejs. Value of : process.env.DB_INFO" + process.env.DB_INFO);
 
 // _CHANGE_Part_3_Service_Broker_Integration_ : Please uncomment the entire db code block below to use DB
 /*
