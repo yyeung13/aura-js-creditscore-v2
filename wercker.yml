@@ -120,6 +120,13 @@ deploy-app-to-oce:
 #        echo "Print traffic routing rules, if any, with istioctl"
 #        istioctl get routerule
 
+# This step prints the traffic routing rules, if any
+    - script:
+      name: Print traffic routing rules, if any, with istioctl
+      code: |
+        echo "Print traffic routing rules, if any, with istioctl"
+        istioctl get routerule
+#
 
 functional-test:
   steps:
