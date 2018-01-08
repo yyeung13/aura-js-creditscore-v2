@@ -19,7 +19,17 @@ exports.list = function(req, res){
     };
 
     console.log("Access the env variable in nodejs. Value of : process.env" + process.env);
-    console.log("Access the env variable in nodejs. Value of : process.env.DB_INFO" + process.env.DB_INFO);
+    var DB_INFO = process.env.DB_INFO;
+    console.log("Access the env variable in nodejs. Value of : process.env.DB_INFO is " + DB_INFO);
+    var DB_INFO_JSON = JSON.parse(DB_INFO);
+    console.log("Access the env variable in nodejs. Value of : DB_INFO_JSON is " + DB_INFO_JSON);
+    var host = DB_INFO_JSON.host;
+    console.log("Access the env variable in nodejs. Value of : DB host is " + host);
+    var adminuser = DB_INFO_JSON.host;
+    console.log("Access the env variable in nodejs. Value of : DB host is " + adminuser);
+    var adminpassword = DB_INFO_JSON.adminpassword;
+    console.log("Access the env variable in nodejs. Value of : DB host is " + adminpassword);
+
 
 // _CHANGE_Part_3_Service_Broker_Integration_ : Please uncomment the entire db code block below to use DB
 /*
