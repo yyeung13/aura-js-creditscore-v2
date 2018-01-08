@@ -33,12 +33,12 @@ spec:
 #
 # _CHANGE_Part_3_Service_Broker_Integration_ : Uncomment the following env block to test service broker integration
 #
-        env:
-        - name: DB_INFO
-          valueFrom:
-            secretKeyRef:
-              name: secret-mysql-sb-inst-1
-              key: connection.json
+#        env:
+#        - name: DB_INFO
+#          valueFrom:
+#            secretKeyRef:
+#              name: secret-mysql-sb-inst-1
+#              key: connection.json
 #
         image: wcr.io/$WERCKER_APPLICATION_OWNER_NAME/$WERCKER_APPLICATION_NAME:$WERCKER_GIT_BRANCH-$WERCKER_GIT_COMMIT
         imagePullPolicy: IfNotPresent

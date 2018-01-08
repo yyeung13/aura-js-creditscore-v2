@@ -13,18 +13,18 @@ exports.list = function(req, res){
     var resultData = {
 
 // _CHANGE_ : Please comment the line with the DUMMY message and uncomment the one with the Welcome message
-        //"MESSAGE": "DUMMY message V2"
-        "MESSAGE": "Welcome to aura-js-creditscore version V2"
+        "MESSAGE": "DUMMY message V2"
+        //"MESSAGE": "Welcome to aura-js-creditscore version V2"
 
     };
 
+// _CHANGE_Part_3_Service_Broker_Integration_ : Please uncomment the entire db code block below to use DB
+/*
+// Start of db code block
     console.log("Access the env variable in nodejs. Value of : process.env" + process.env);
     var DB_INFO = process.env.DB_INFO;
     console.log("Access the env variable in nodejs. Value of : process.env.DB_INFO is " + DB_INFO);
 
-// _CHANGE_Part_3_Service_Broker_Integration_ : Please uncomment the entire db code block below to use DB
-
-// Start of db code block
     var DB_INFO_JSON = JSON.parse(DB_INFO);
     console.log("Access the env variable in nodejs. Value of : DB_INFO_JSON is " + DB_INFO_JSON);
     var host = DB_INFO_JSON.host;
@@ -37,7 +37,6 @@ exports.list = function(req, res){
 
     var mysql      = require('mysql');
     var connection = mysql.createConnection({
-        // TODO Replace hardcoded values with that from service broker instance K8s secret
         host     : host,
         user     : adminuser,
         password : adminpassword
@@ -52,7 +51,7 @@ exports.list = function(req, res){
         } else {
             console.log("Connected to DB");
             console.log("Query execution results: " + results);
-            console.log("Query execution results: " + fields);
+            console.log("Query execution fields: " + fields);
             resultData = {
                 "MESSAGE" : "SUCCESS communicating with DB"
             };
@@ -60,7 +59,7 @@ exports.list = function(req, res){
 
     });
 // End of db code block
-
+*/
     res.setHeader('Content-Type', 'application/json');
     res.send(JSON.stringify(resultData));
 };

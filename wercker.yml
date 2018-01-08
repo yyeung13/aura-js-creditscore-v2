@@ -76,36 +76,51 @@ deploy-app-to-oce:
         insecure-skip-tls-verify: true
         command: create secret docker-registry wrelease --docker-server=wcr.io --docker-username=$WERCKER_APPLICATION_OWNER_NAME --docker-password=$KUBERNETES_TOKEN --docker-email=$DOCKER_EMAIL
         
-    # Deploy the app with istio side car injection (manual)
-#    - kubectl:
-#        name: create deplyoment
-#        server: $KUBERNETES_MASTER
-#        token: $KUBERNETES_TOKEN
-#        insecure-skip-tls-verify: true
-#        command: apply -f <(istioctl kube-inject -f kubernetes-deployment.yml)
+# Deploy the app with istio side car injection (manual)
+    - kubectl:
+        name: create deplyoment
+        server: $KUBERNETES_MASTER
+        token: $KUBERNETES_TOKEN
+        insecure-skip-tls-verify: true
+        command: apply -f <(istioctl kube-inject -f kubernetes-deployment.yml)
 
-    # This script prints the traffic routing rules, if any
+# This step prints the traffic routing rules, if any
     - script:
       name: Print traffic routing rules, if any
       code: |
         istioctl get routerule
 
-    # This script adds the canary deploy rule to route traffic to v2.
-    # Uncomment it as needed (see tutorial steps), and since the service v2 is already deployed
-    # comment the kubectl deploy step before running this route rule
-    - script:
-      name: Add rule to route traffic to v2 with istioctl
-      code: |
-        echo "Delete existing rule before creating new"
-        istioctl delete -f route-rules.yaml
-        echo "Add rule to route traffic to v2 with istioctl"
-        istioctl create -f route-rules.yaml
+# Use the following steps to add, replace or delete the canary deploy rule to route traffic to v1/v2
+# On first kubectl deploy use "add" to create a 50:50 v1:v2 route rule
+# After that comment the "add" step
+# Uncomment the "replace" step as needed
 
-    # This script checks if the rule has been set correctly
+# Use this step to add a route rule
+# This step is only required the first run, after that comment it out
     - script:
-      name: Check if the rule has been set correctly
+      name: Add traffic route rule with istioctl
       code: |
+        echo "Add traffic route rule with istioctl"
+        istioctl create -f route-rules.yaml
+        echo "Check if the rule has been set correctly"
         istioctl get routerule route-rules -o yaml
+
+# Use this step to replace the route rule when you change it
+#    - script:
+#      name: Replace traffic route rule with istioctl
+#      code: |
+#        echo "Replace traffic route rule with istioctl"
+#        istioctl replace -f route-rules.yaml
+#        echo "Check if the rule has been set correctly"
+#        istioctl get routerule route-rules -o yaml
+
+# Use this script to delete the route rule when not needed
+#    - script:
+#      name: Delete traffic routing rule with istioctl
+#      code: |
+#        echo "Delete traffic routing rule with istioctl"
+#        istioctl delete -f route-rules.yaml
+
 
 functional-test:
   steps:
