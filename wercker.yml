@@ -77,12 +77,21 @@ deploy-app-to-oce:
         command: create secret docker-registry wrelease --docker-server=wcr.io --docker-username=$WERCKER_APPLICATION_OWNER_NAME --docker-password=$KUBERNETES_TOKEN --docker-email=$DOCKER_EMAIL
         
     # Deploy the app with istio side car injection (manual)
-    - kubectl:
-        name: create deplyoment
-        server: $KUBERNETES_MASTER
-        token: $KUBERNETES_TOKEN
-        insecure-skip-tls-verify: true
-        command: apply -f <(istioctl kube-inject -f kubernetes-deployment.yml)
+#    - kubectl:
+#        name: create deplyoment
+#        server: $KUBERNETES_MASTER
+#        token: $KUBERNETES_TOKEN
+#        insecure-skip-tls-verify: true
+#        command: apply -f <(istioctl kube-inject -f kubernetes-deployment.yml)
+
+    # This script adds the canary deploy rule to route traffic to v2.
+    # Uncomment it as needed (see tutorial steps), and since the service v2 is already deployed
+    # comment the kubectl deploy step before running this route rule
+    - script:
+      name: Adding rule to route traffic to v2 with istioctl
+      code: |
+        echo "Add rule to route traffic to v2 with istioctl"
+        istioctl create -f route-rules.yaml
 
 functional-test:
   steps:
