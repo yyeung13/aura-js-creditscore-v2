@@ -7,11 +7,9 @@ spec:
     name: aura-js-creditscore
   precedence: 1
   route:
-# Default routing rule 50:50
-# To route traffic to v2 only change weight to 100 and 0 OR 100 and comment out v1 label section (last 3 lines)
   - labels:
       version: v2
-    weight: 50
-  - labels:
-      version: v1
-    weight: 50
+    weight: 100
+#  - labels:
+#      version: v1
+#    weight: 50
