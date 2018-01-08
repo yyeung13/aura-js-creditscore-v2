@@ -112,13 +112,13 @@ deploy-app-to-oce:
 #        istioctl get routerule route-rules -o yaml
 #
 # Uncomment and use the "delete" step to delete the route rule, when not needed. After that comment the "delete" step
-    - script:
-      name: Delete traffic routing rule with istioctl
-      code: |
-        echo "Delete traffic routing rule with istioctl"
-        istioctl delete -f route-rules.yaml
-        echo "Print traffic routing rules, if any, with istioctl"
-        istioctl get routerule
+#    - script:
+#      name: Delete traffic routing rule with istioctl
+#      code: |
+#        echo "Delete traffic routing rule with istioctl"
+#        istioctl delete -f route-rules.yaml
+#        echo "Print traffic routing rules, if any, with istioctl"
+#        istioctl get routerule
 
 
 functional-test:
