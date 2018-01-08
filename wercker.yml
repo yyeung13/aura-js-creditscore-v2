@@ -76,13 +76,13 @@ deploy-app-to-oce:
         insecure-skip-tls-verify: true
         command: create secret docker-registry wrelease --docker-server=wcr.io --docker-username=$WERCKER_APPLICATION_OWNER_NAME --docker-password=$KUBERNETES_TOKEN --docker-email=$DOCKER_EMAIL
         
-# Deploy the app with istio side car injection (manual)
-#    - kubectl:
-#        name: create deplyoment
-#        server: $KUBERNETES_MASTER
-#        token: $KUBERNETES_TOKEN
-#        insecure-skip-tls-verify: true
-#        command: apply -f <(istioctl kube-inject -f kubernetes-deployment.yml)
+ Deploy the app with istio side car injection (manual)
+    - kubectl:
+        name: create deplyoment
+        server: $KUBERNETES_MASTER
+        token: $KUBERNETES_TOKEN
+        insecure-skip-tls-verify: true
+        command: apply -f <(istioctl kube-inject -f kubernetes-deployment.yml)
 
 # This step prints the traffic routing rules, if any
     - script:
@@ -103,13 +103,13 @@ deploy-app-to-oce:
 #        istioctl get routerule route-rules -o yaml
 #
 # Uncomment and use the "replace" step to update the route rule when you change it
-    - script:
-      name: Replace traffic route rule with istioctl
-      code: |
-        echo "Replace traffic route rule with istioctl"
-        istioctl replace -f route-rules.yaml
-        echo "Check if the rule has been set correctly"
-        istioctl get routerule route-rules -o yaml
+#    - script:
+#      name: Replace traffic route rule with istioctl
+#      code: |
+#        echo "Replace traffic route rule with istioctl"
+#        istioctl replace -f route-rules.yaml
+#        echo "Check if the rule has been set correctly"
+#        istioctl get routerule route-rules -o yaml
 #
 # Uncomment and use the "delete" step to delete the route rule, when not needed. After that comment the "delete" step
 #    - script:
