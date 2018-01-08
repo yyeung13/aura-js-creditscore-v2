@@ -94,16 +94,18 @@ deploy-app-to-oce:
     # Uncomment it as needed (see tutorial steps), and since the service v2 is already deployed
     # comment the kubectl deploy step before running this route rule
     - script:
-      name: Adding rule to route traffic to v2 with istioctl
+      name: Add rule to route traffic to v2 with istioctl
       code: |
-        echo "Add rule to route traffic to v2 with istioctl"
+        echo "Delete existing rule before creating new"
         istioctl delete -f route-rules.yaml
+        echo "Add rule to route traffic to v2 with istioctl"
+        istioctl create -f route-rules.yaml
 
     # This script checks if the rule has been set correctly
-#    - script:
-#      name: Check if the rule has been set correctly
-#      code: |
-#        istioctl get routerule route-rules -o yaml
+    - script:
+      name: Check if the rule has been set correctly
+      code: |
+        istioctl get routerule route-rules -o yaml
 
 functional-test:
   steps:
