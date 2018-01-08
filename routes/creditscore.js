@@ -22,53 +22,52 @@ exports.list = function(req, res){
 // 1) Comment the two methods res.setHeader() and res.send()
 // 2) Uncomment the entire db code block below to use DB
 
-    res.setHeader('Content-Type', 'application/json');
-    res.send(JSON.stringify(resultData));
+//    res.setHeader('Content-Type', 'application/json');
+//    res.send(JSON.stringify(resultData));
 
-    /*
     // Start of db code block
-        console.log("Access the env variable in nodejs. Value of : process.env" + process.env);
-        var DB_INFO = process.env.DB_INFO;
-        console.log("Access the env variable in nodejs. Value of : process.env.DB_INFO is " + DB_INFO);
+    console.log("Access the env variable in nodejs. Value of : process.env" + process.env);
+    var DB_INFO = process.env.DB_INFO;
+    console.log("Access the env variable in nodejs. Value of : process.env.DB_INFO is " + DB_INFO);
 
-        var DB_INFO_JSON = JSON.parse(DB_INFO);
-        console.log("Access the env variable in nodejs. Value of : DB_INFO_JSON is " + DB_INFO_JSON);
-        var host = DB_INFO_JSON.host;
-        console.log("Access the env variable in nodejs. Value of : DB host is " + host);
-        var adminuser = DB_INFO_JSON.adminuser;
-        console.log("Access the env variable in nodejs. Value of : DB adminuser is " + adminuser);
-        var adminpassword = DB_INFO_JSON.adminpassword;
-        console.log("Access the env variable in nodejs. Value of : DB adminpassword is " + adminpassword);
+    var DB_INFO_JSON = JSON.parse(DB_INFO);
+    console.log("Access the env variable in nodejs. Value of : DB_INFO_JSON is " + DB_INFO_JSON);
+    var host = DB_INFO_JSON.host;
+    console.log("Access the env variable in nodejs. Value of : DB host is " + host);
+    var adminuser = DB_INFO_JSON.adminuser;
+    console.log("Access the env variable in nodejs. Value of : DB adminuser is " + adminuser);
+    var adminpassword = DB_INFO_JSON.adminpassword;
+    console.log("Access the env variable in nodejs. Value of : DB adminpassword is " + adminpassword);
 
 
-        var mysql      = require('mysql');
-        var connection = mysql.createConnection({
-            host     : host,
-            user     : adminuser,
-            password : adminpassword
-        });
+    var mysql      = require('mysql');
+    var connection = mysql.createConnection({
+        host     : host,
+        user     : adminuser,
+        password : adminpassword
+    });
 
-        connection.query('SELECT 1', function (error, results, fields) {
-            if (error) {
-                console.log("DB communication error : " + error);
-                resultData = {
-                    "MESSAGE" : "ERROR communicating with DB"
-                };
-            } else {
-                console.log("Connected to DB");
-                console.log("Query execution results: " + results);
-                console.log("Query execution fields: " + fields);
-                resultData = {
-                    "MESSAGE" : "SUCCESS communicating with DB"
-                };
-            }
+    connection.query('SELECT 1', function (error, results, fields) {
+        if (error) {
+            console.log("DB communication error : " + error);
+            resultData = {
+                "MESSAGE" : "ERROR communicating with DB"
+            };
+        } else {
+            console.log("Connected to DB");
+            console.log("Query execution results: " + results);
+            console.log("Query execution fields: " + fields);
+            resultData = {
+                "MESSAGE" : "SUCCESS communicating with DB"
+            };
+        }
 
-            res.setHeader('Content-Type', 'application/json');
-            res.send(JSON.stringify(resultData));
+        res.setHeader('Content-Type', 'application/json');
+        res.send(JSON.stringify(resultData));
 
-        });
+    });
     // End of db code block
-    */
+
 
 };
 
