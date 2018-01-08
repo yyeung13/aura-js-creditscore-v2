@@ -84,6 +84,12 @@ deploy-app-to-oce:
 #        insecure-skip-tls-verify: true
 #        command: apply -f <(istioctl kube-inject -f kubernetes-deployment.yml)
 
+    # This script prints the traffic routing rules, if any
+    - script:
+      name: Print traffic routing rules, if any
+      code: |
+        istioctl get routerule
+
     # This script adds the canary deploy rule to route traffic to v2.
     # Uncomment it as needed (see tutorial steps), and since the service v2 is already deployed
     # comment the kubectl deploy step before running this route rule
@@ -92,6 +98,8 @@ deploy-app-to-oce:
       code: |
         echo "Add rule to route traffic to v2 with istioctl"
         istioctl create -f route-rules.yaml
+        echo "Check if the rule has been set correctly"
+        istioctl get routerule route-rules -o yaml
 
 functional-test:
   steps:
