@@ -9,7 +9,7 @@ spec:
   route:
   - labels:
       version: v2
-    weight: 50
+    weight: 25
   - labels:
       version: v1
-    weight: 50
+    weight: 75
