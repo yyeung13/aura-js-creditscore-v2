@@ -97,7 +97,7 @@ deploy-app-to-oce:
       name: Adding rule to route traffic to v2 with istioctl
       code: |
         echo "Add rule to route traffic to v2 with istioctl"
-        istioctl create -f route-rules.yaml
+#        istioctl create -f route-rules.yaml
         echo "Check if the rule has been set correctly"
         istioctl get routerule route-rules -o yaml
 
