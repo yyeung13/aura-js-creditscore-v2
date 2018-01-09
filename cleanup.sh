@@ -8,7 +8,7 @@ kubectl delete -f mysql-pvc.yaml
 
 # Clean up PART 2
 # 2.1) Clean up istio route rule
-istioctl delete -f route-rules.yaml
+istioctl delete routerule route-rules
 # 2.2) Clean up aura-js-creditscore-v2 deployment
 kubectl delete deployment aura-js-creditscore-v2
 
