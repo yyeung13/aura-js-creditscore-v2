@@ -119,4 +119,3 @@ deploy-app-to-oce:
 #        istioctl delete -f route-rules.yaml
 #        echo "Print traffic routing rules, if any, with istioctl"
 #        istioctl get routerule
-
