@@ -4,7 +4,7 @@
 # 3.1) Clean up mysql service broker
 oms delete serviceinstance mysql-sb-inst-1
 # 3.2) Clean up PVC, PC and OCI Block Volume
-kubectl delete -f mysql-pvc.yaml
+kubectl delete -f https://raw.githubusercontent.com/sachin-pikle/aura-js-creditscore-v2/master/mysql-pvc.yaml
 
 # Clean up PART 2
 # 2.1) Clean up istio route rule
