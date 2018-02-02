@@ -94,13 +94,13 @@ deploy-app-to-oce:
 # Use the following steps to add, replace or delete the canary deploy rule to route traffic to v1/v2
 #
 # Uncomment and use the "add" step to add a rule for the first time. After that comment the "add" step
-    - script:
-      name: Add traffic route rule with istioctl
-      code: |
-        echo "Add traffic route rule with istioctl"
-        istioctl create -f route-rules.yaml
-        echo "Check if the rule has been set correctly"
-        istioctl get routerule route-rules -o yaml
+#    - script:
+#      name: Add traffic route rule with istioctl
+#      code: |
+#        echo "Add traffic route rule with istioctl"
+#        istioctl create -f route-rules.yaml
+#        echo "Check if the rule has been set correctly"
+#        istioctl get routerule route-rules -o yaml
 #
 # Uncomment and use the "replace" step to update the route rule when you change it
 #    - script:
