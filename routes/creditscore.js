@@ -16,7 +16,7 @@ exports.list = function(req, res){
         //"MESSAGE": "DUMMY message V2"
         "MESSAGE": "Welcome to aura-js-creditscore version V2"
 
-    };
+    }; 
 
 // _CHANGE_Part_3_Service_Broker_Integration_ :
 // 1) Comment the two methods res.setHeader() and res.send()
