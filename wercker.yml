@@ -77,12 +77,12 @@ deploy-app-to-oce:
         command: create secret docker-registry wrelease --docker-server=wcr.io --docker-username=$WERCKER_APPLICATION_OWNER_NAME --docker-password=$KUBERNETES_TOKEN --docker-email=abc@gmail.com
         
 # Deploy the app with istio side car injection (manual)
-#    - kubectl:
-#        name: create deplyoment
-#        server: $KUBERNETES_MASTER
-#        token: $KUBERNETES_TOKEN
-#        insecure-skip-tls-verify: true
-#        command: apply -f <(istioctl kube-inject -f kubernetes-deployment.yml)
+    - kubectl:
+        name: create deplyoment
+        server: $KUBERNETES_MASTER
+        token: $KUBERNETES_TOKEN
+        insecure-skip-tls-verify: true
+        command: apply -f <(istioctl kube-inject -f kubernetes-deployment.yml)
 
 # This step prints the traffic routing rules, if any
     - script:
