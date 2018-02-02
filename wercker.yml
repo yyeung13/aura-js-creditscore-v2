@@ -74,7 +74,7 @@ deploy-app-to-oce:
         server: $KUBERNETES_MASTER
         token: $KUBERNETES_TOKEN
         insecure-skip-tls-verify: true
-        command: create secret docker-registry wrelease --docker-server=wcr.io --docker-username=$WERCKER_APPLICATION_OWNER_NAME --docker-password=$KUBERNETES_TOKEN --docker-email=$DOCKER_EMAIL
+        command: create secret docker-registry wrelease --docker-server=wcr.io --docker-username=$WERCKER_APPLICATION_OWNER_NAME --docker-password=$KUBERNETES_TOKEN --docker-email=abc@gmail.com
         
 # Deploy the app with istio side car injection (manual)
     - kubectl:
@@ -119,3 +119,11 @@ deploy-app-to-oce:
 #        istioctl delete -f route-rules.yaml
 #        echo "Print traffic routing rules, if any, with istioctl"
 #        istioctl get routerule
+#
+    - kubectl:
+        name: get LoadBalancer public IP address
+        server: $KUBERNETES_MASTER
+        token: $KUBERNETES_TOKEN
+        insecure-skip-tls-verify: true
+        command: get svc -o jsonpath='{.items[*].status.loadBalancer.ingress[*].ip}' --all-namespaces
+
